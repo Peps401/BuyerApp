@@ -1,59 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-      <html lang="en" xmlns:th="http://www.thymeleaf.org">
-      <head>
-      <meta charset="ISO-8859-1">
-      <title>Employee Management Subsystem</title>
-  <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+    <meta charset="ISO-8859-1">
+    <title>Order Management Subsystem</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
+
 <body>
+
 <div class="container">
-  <h1>order Management Subsystem</h1>
-  <hr>
-  <h2>Add new order</h2>
 
-  <form action="#" th:action="@{/order/save}" th:object="${order}"
-        method="POST">
-    <input type="text" th:field="*{firstName}" placeholder="First Name"
-           class="form-control mb-4 col-4">
-    <input type="text" th:field="*{lastName}" placeholder="Last Name"
-           class="form-control mb-4 col-4">
-    <input type="text" th:field="*{status}" placeholder="status"
-            class="form-control mb-4 col-4">
+    <h1>Order Management Subsystem</h1>
+    <hr>
+    <h2>Add new order</h2>
 
-    <input type="text" th:field="*{time}" placeholder="time"
-           class="form-control mb-4 col-4">
-    <input type="text" th:field="*{payment by}" placeholder="payment by"
-           class="form-control mb-4 col-4">
-    <input type="text" th:field="*{buyer address}" placeholder="buyer address"
-            class="form-control mb-4 col-4">
-    <input type="text" th:field="*{contact}" placeholder="contact"
-           class="form-control mb-4 col-4">
-    <input type="text" th:field="*{info}" placeholder="info"
-           class="form-control mb-4 col-4">
-    <input type="text" th:field="*{items}" placeholder="items"
-            class="form-control mb-4 col-4">
-    <input type="text" th:field="*{total}" placeholder="total"
-            class="form-control mb-4 col-4">
+    <form action="#" th:action="@{/order/save}" th:object="${order}" method="POST">
 
-    <button type="submit" class="btn btn-info col-2">Save order</button>
-  </form>
+        <input type="text" th:field="*{buyerId}" placeholder="Buyer ID"
+               class="form-control mb-4 col-4">
 
-  <hr>
+        <input type="text" th:field="*{stringOrderStatus}" placeholder="Order Status"
+               class="form-control mb-4 col-4">
 
-  <a th:href="@{/order/}"> Back to list of orders</a>
+        <input type="text" th:field="*{stringPaymentOption}" placeholder="Payment Option"
+               class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{deliveryAddressId}" placeholder="Delivery Address ID"
+               class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{contactNumber}" placeholder="Contact Number"
+               class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{currency}" placeholder="Currency"
+               class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{totalPrice}" placeholder="Total Price"
+               class="form-control mb-4 col-4">
+
+        <button type="submit" class="btn btn-info col-2">Save Order</button>
+
+    </form>
+
+    <hr>
+
+    <a th:href="@{/order/}">Back to list of orders</a>
+
 </div>
-</body>
-</html>
-</title>
-</head>
-<body>
 
 </body>
 </html>

@@ -2,6 +2,8 @@ package hr.abysalto.hiring.api.junior.controller;
 
 import hr.abysalto.hiring.api.junior.components.DatabaseInitializer;
 import hr.abysalto.hiring.api.junior.manager.OrderManager;
+import hr.abysalto.hiring.api.junior.manager.BuyerManager;
+import hr.abysalto.hiring.api.junior.model.BuyerAddress;
 import hr.abysalto.hiring.api.junior.model.Order;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Tag(name = "orders", description = "for handling orders")
 @RequestMapping("order")
@@ -29,7 +33,11 @@ public class OrderController {
 	@Autowired
 	private OrderManager orderManager;
 	@Autowired
+	private BuyerManager buyerManager;
+	@Autowired
 	private DatabaseInitializer databaseInitializer;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@Operation(summary = "Get all orders", responses = {
 			@ApiResponse(description = "Success", responseCode = "200", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Order.class)))),
@@ -56,13 +64,14 @@ public class OrderController {
 
 	@GetMapping("/addnew")
 	public String addNewOrder(Model model) {
-		Order order = new Order();
-		model.addAttribute("order", order);
+		model.addAttribute("order", new Order());
 		return "order/neworder";
 	}
 
 	@PostMapping("/save")
 	public String saveOrder(@ModelAttribute("order") Order order) {
+		order.setOrderTime(java.time.LocalDateTime.now());
+		
 		this.orderManager.save(order);
 		return "redirect:/order/";
 	}
@@ -71,6 +80,12 @@ public class OrderController {
 	public String updateForm(@PathVariable(value = "id") long id, Model model) {
 		Order order = this.orderManager.getById(id);
 		model.addAttribute("order", order);
+		model.addAttribute("buyers", buyerManager.getAllBuyers());
+
+		model.addAttribute("addresses",
+            jdbcTemplate.query(
+                    "SELECT * FROM buyer_address",
+                    new BeanPropertyRowMapper<>(BuyerAddress.class)));
 		return "order/updateorder";
 	}
 

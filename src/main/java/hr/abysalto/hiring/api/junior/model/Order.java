@@ -23,7 +23,7 @@ public class Order {
 
 	@Column("ORDER_STATUS")
 	public String getStringOrderStatus() {
-		return this.orderStatus.toString();
+		return this.orderStatus == null ? "" : this.orderStatus.toString();
 	}
 
 	public void setStringOrderStatus(String orderStatusString) {
@@ -37,7 +37,7 @@ public class Order {
 
 	@Column("PAYMENT_OPTION")
 	public String getStringPaymentOption() {
-		return this.paymentOption.toString();
+		return this.paymentOption == null ? "" : this.paymentOption.toString();
 	}
 
 	public void setStringPaymentOption(String paymentOptionString) {
