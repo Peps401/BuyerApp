@@ -17,4 +17,9 @@ Svaka narudžba treba sadržavati sljedeće informacije:
 - Popis artikala s nazivom, količinom i cijenom
 - Iznos i valutu pojedine narudžbe
 
+Update:
+- dodati pracenje Artikala
+- osposobiti prikaz artikala ne samo broj
+- kad se dodaju artikli da se mogu i maknuti
+
 Java i Spring
