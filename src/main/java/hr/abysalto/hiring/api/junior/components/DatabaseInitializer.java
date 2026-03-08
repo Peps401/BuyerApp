@@ -28,7 +28,7 @@ public class DatabaseInitializer {
 				 first_name varchar(100) NOT NULL,
 				 last_name varchar(100) NOT NULL,
 				 title varchar(100) NULL
-			 );
+			 )
  		""");
 
 		this.jdbcTemplate.execute("""
@@ -37,7 +37,7 @@ public class DatabaseInitializer {
 				 city varchar(100) NOT NULL,
 				 street varchar(100) NOT NULL,
 				 home_number varchar(100) NULL
-			 );
+			 )
  		""");
 
 		this.jdbcTemplate.execute("""
@@ -52,7 +52,7 @@ public class DatabaseInitializer {
 				 total_price decimal,
 				 CONSTRAINT FK_order_to_buyer FOREIGN KEY (buyer_id) REFERENCES buyer (buyer_id),
 				 CONSTRAINT FK_order_to_delivery_address FOREIGN KEY (delivery_address_id) REFERENCES buyer_address (buyer_address_id)
-			 );
+			 )
  		""");
 
 		this.jdbcTemplate.execute("""
@@ -65,7 +65,7 @@ public class DatabaseInitializer {
 				 price decimal,
 				 CONSTRAINT UC_order_items UNIQUE (order_item_id, order_nr),
 				 CONSTRAINT FK_order_item_to_order FOREIGN KEY (order_nr) REFERENCES "order" (order_nr)
-			 );
+			 )
  		""");
 	}
 
