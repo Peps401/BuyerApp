@@ -51,5 +51,8 @@ public class Order {
 	private String currency;
 	private String note;
 	private BigDecimal totalPrice;
+
+	@Transient
+	private Integer itemCount;
 	
 }

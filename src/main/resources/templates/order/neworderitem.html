@@ -2,30 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add item</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
 
-<h2>Add item</h2>
+<div class="container">
+    <h2>Add item</h2>
 
-<form th:action="@{/orderitem/save}" th:object="${orderItem}" method="POST">
+    <form th:action="@{/orderitem/save}" th:object="${orderItem}" method="POST">
 
-    <input type="hidden" th:field="*{orderNr}">
+        <input type="hidden" th:field="*{orderNr}">
+        <input type="hidden" th:field="*{itemNt}" id="itemNt">
+        <input type="hidden" th:field="*{name}" id="itemName">
+        <input type="hidden" th:field="*{price}" id="itemPrice">
 
-    <label>Name</label>
-    <input type="text" th:field="*{name}">
+        <label>Product</label>
+        <select class="form-control mb-4 col-4" onchange="fillItemData(this)">
+            <option value="">Select product</option>
+            <option data-id="1" data-name="Pizza Margherita" data-price="10.00">
+                Pizza Margherita
+            </option>
+            <option data-id="2" data-name="Coca Cola" data-price="5.50">
+                Coca Cola
+            </option>
+            <option data-id="3" data-name="Burger" data-price="12.00">
+                Burger
+            </option>
+            <option data-id="4" data-name="Fries" data-price="3.00">
+                Fries
+            </option>
+        </select>
 
-    <label>Quantity</label>
-    <input type="number" th:field="*{quantity}">
+        <label>Quantity</label>
+        <input type="number" th:field="*{quantity}" class="form-control mb-4 col-4">
 
-    <label>Price</label>
-    <input type="number" step="0.01" th:field="*{price}">
+        <label>Chosen price</label>
+        <input type="text" id="shownPrice" class="form-control mb-4 col-4" readonly>
 
-    <label>Item number</label>
-    <input type="number" th:field="*{itemNt}">
+        <button type="submit" class="btn btn-info col-2">Save item</button>
+    </form>
+</div>
 
-    <button type="submit">Save</button>
+<script>
+function fillItemData(select) {
+    const option = select.options[select.selectedIndex];
 
-</form>
+    document.getElementById("itemNt").value = option.dataset.id || "";
+    document.getElementById("itemName").value = option.dataset.name || "";
+    document.getElementById("itemPrice").value = option.dataset.price || "";
+    document.getElementById("shownPrice").value = option.dataset.price || "";
+}
+</script>
 
 </body>
 </html>

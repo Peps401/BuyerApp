@@ -87,5 +87,9 @@ public class DatabaseInitializer {
 
 		this.jdbcTemplate.execute("INSERT INTO order_item (order_nr, item_nt, name, quantity, price) VALUES (1, 1, 'Pizza Margherita', 2, 10.00)");
 		this.jdbcTemplate.execute("INSERT INTO order_item (order_nr, item_nt, name, quantity, price) VALUES (2, 2, 'Coca Cola', 1, 5.50)");
-	}
+
+		this.jdbcTemplate.execute("INSERT INTO order_item (order_nr, item_nt, name, quantity, price) VALUES (1, 1, 'Pizza Margherita', 1, 10.00)");
+		this.jdbcTemplate.execute("INSERT INTO order_item (order_nr, item_nt, name, quantity, price) VALUES (1, 2, 'Coca Cola', 1, 5.50)");
+		this.jdbcTemplate.execute("INSERT INTO order_item (order_nr, item_nt, name, quantity, price) VALUES (1, 3, 'Burger', 1, 12.00)");
+}
 }

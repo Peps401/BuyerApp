@@ -25,7 +25,9 @@
             <th>Delivery Address</th>
             <th>Contact nr</th>
             <th>Currency</th>
+            <th>Items</th>
             <th>Total</th>
+            <th>Note</th>
             <th>Change</th>
         </tr>
         </thead>
@@ -39,7 +41,9 @@
             <td th:text="${order.deliveryAddressId}"></td>
             <td th:text="${order.contactNumber}"></td>
             <td th:text="${order.currency}"></td>
+            <td th:text="${order.itemCount}"></td>
             <td th:text="${order.totalPrice}"></td>
+            <td th:text="${order.note}">
             <td>
                 <a th:href="@{/order/showFormForUpdate/{id}(id=${order.orderNr})}"
                    class="btn btn-primary btn-sm">Update</a>

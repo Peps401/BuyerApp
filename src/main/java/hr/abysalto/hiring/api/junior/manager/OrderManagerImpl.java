@@ -30,6 +30,16 @@ public class OrderManagerImpl implements OrderManager {
 		return total;
 	}
 
+	private Integer calculateItemCount(Long orderNr) {
+    Integer count = jdbcTemplate.queryForObject(
+        "SELECT COALESCE(SUM(quantity),0) FROM order_item WHERE order_nr = ?",
+        Integer.class,
+        orderNr
+    );
+
+    return count == null ? 0 : count;
+	}
+
 	@Override
 	public Iterable<Order> getAllOrders() {
 
@@ -42,7 +52,11 @@ public class OrderManagerImpl implements OrderManager {
     orders.sort((o1, o2) -> 
         o2.getTotalPrice().compareTo(o1.getTotalPrice())
     );
-
+	
+	for (Order order : orders) {
+    order.setTotalPrice(calculateTotal(order.getOrderNr()));
+    order.setItemCount(calculateItemCount(order.getOrderNr()));
+	}
     return orders;
 }
 
