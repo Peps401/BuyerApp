@@ -31,6 +31,8 @@
                     class="btn btn-primary">Update</a>
                 <a th:href="@{/buyer/deleteBuyer/{id}(id=${buyer.buyerId})}"
                    class="btn btn-danger">Delete</a>
+                <a th:href="@{/orderitem/add/{id}(id=${order.orderNr})}"
+                    class="btn btn-success btn-sm">Add item</a>
             </td>
         </tr>
         </tbody>

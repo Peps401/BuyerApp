@@ -45,6 +45,9 @@
                    class="btn btn-primary btn-sm">Update</a>
                 <a th:href="@{/order/deleteorder/{id}(id=${order.orderNr})}"
                    class="btn btn-danger btn-sm">Delete</a>
+                <a th:href="@{/orderitem/add/{id}(id=${order.orderNr})}">
+                    Add item
+                </a>
             </td>
         </tr>
         </tbody>

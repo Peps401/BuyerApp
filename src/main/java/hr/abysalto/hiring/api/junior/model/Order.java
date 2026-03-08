@@ -17,6 +17,7 @@ public class Order {
 	@Id
 	private Long orderNr;
 	private Long buyerId;
+	
 	//private Buyer buyer;
 	@Transient
 	private OrderStatus orderStatus;
@@ -48,5 +49,7 @@ public class Order {
 	//	private BuyerAddress deliveryAddress;
 	private String contactNumber;
 	private String currency;
+	private String note;
 	private BigDecimal totalPrice;
+	
 }

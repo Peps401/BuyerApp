@@ -49,6 +49,7 @@ public class DatabaseInitializer {
 				 delivery_address_id INT NOT NULL,
 				 contact_number varchar(100) NULL,
 				 currency varchar(50) NULL,
+				 note varchar(255),
 				 payment_option VARCHAR(50) NULL,
 				 total_price decimal,
 				 CONSTRAINT FK_order_to_buyer FOREIGN KEY (buyer_id) REFERENCES buyer (buyer_id),
