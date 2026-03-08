@@ -65,13 +65,20 @@ public class OrderController {
 	@GetMapping("/addnew")
 	public String addNewOrder(Model model) {
 		model.addAttribute("order", new Order());
+		
+		model.addAttribute("buyers", buyerManager.getAllBuyers());
+
+		model.addAttribute("addresses",
+            jdbcTemplate.query(
+                    "SELECT * FROM buyer_address",
+                    new BeanPropertyRowMapper<>(BuyerAddress.class)));
 		return "order/neworder";
 	}
 
 	@PostMapping("/save")
 	public String saveOrder(@ModelAttribute("order") Order order) {
 		order.setOrderTime(java.time.LocalDateTime.now());
-		
+
 		this.orderManager.save(order);
 		return "redirect:/order/";
 	}

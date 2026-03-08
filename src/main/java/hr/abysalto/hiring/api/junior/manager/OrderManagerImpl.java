@@ -4,6 +4,7 @@ import hr.abysalto.hiring.api.junior.model.Order;
 import hr.abysalto.hiring.api.junior.repository.OrderRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,14 +32,19 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public Iterable<Order> getAllOrders() {
-		Iterable<Order> orders = this.orderRepository.findAll();
 
-		for (Order order : orders) {
-			order.setTotalPrice(calculateTotal(order.getOrderNr()));
-		}
+    List<Order> orders = (List<Order>) this.orderRepository.findAll();
+
+    for (Order order : orders) {
+        order.setTotalPrice(calculateTotal(order.getOrderNr()));
+    }
+
+    orders.sort((o1, o2) -> 
+        o2.getTotalPrice().compareTo(o1.getTotalPrice())
+    );
 
     return orders;
-	}
+}
 
 	@Override
 	public void save(Order order) {

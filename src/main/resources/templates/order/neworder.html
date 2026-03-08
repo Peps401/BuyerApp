@@ -18,17 +18,38 @@
 
     <form action="#" th:action="@{/order/save}" th:object="${order}" method="POST">
 
-        <input type="text" th:field="*{buyerId}" placeholder="Buyer ID"
-               class="form-control mb-4 col-4">
+        <label>Buyer ID</label>
+              <select th:field="*{buyerId}" class="form-control mb-4 col-4">
+                     <option th:each="buyer : ${buyers}"
+                            th:value="${buyer.buyerId}"
+                            th:text="${buyer.firstName + ' ' + buyer.lastName}">
+                     </option>
+              </select>
 
-        <input type="text" th:field="*{stringOrderStatus}" placeholder="Order Status"
-               class="form-control mb-4 col-4">
+       <label>Order Status</label>
+       <select th:field="*{stringOrderStatus}" class="form-control mb-4 col-4">
+              <option th:each="status : ${T(hr.abysalto.hiring.api.junior.model.OrderStatus).values()}"
+                     th:value="${status}"
+                     th:text="${status}">
+              </option>
+       </select>
 
-        <input type="text" th:field="*{stringPaymentOption}" placeholder="Payment Option"
-               class="form-control mb-4 col-4">
+       <label>Payment Option</label>
+       <select th:field="*{stringPaymentOption}" class="form-control mb-4 col-4">
+              <option th:each="payment : ${T(hr.abysalto.hiring.api.junior.model.PaymentOption).values()}"
+                     th:value="${payment}"
+                     th:text="${payment}">
+              </option>
+       </select>
 
-        <input type="text" th:field="*{deliveryAddressId}" placeholder="Delivery Address ID"
-               class="form-control mb-4 col-4">
+       <label>Delivery Address ID</label>
+       <select th:field="*{deliveryAddressId}" class="form-control mb-4 col-4">
+       <option value="">Select address</option>
+       <option th:each="address : ${addresses}"
+                     th:value="${address.buyerAddressId}"
+                     th:text="${address.city + ', ' + address.street + ' ' + address.homeNumber}">
+       </option>
+       </select>
 
         <input type="text" th:field="*{contactNumber}" placeholder="Contact Number"
                class="form-control mb-4 col-4">
